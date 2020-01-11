@@ -1,7 +1,7 @@
 <template>
   <transition :name="overlayTransition">
     <div
-      v-if="visibility.overlay"
+      v-show="visibility.overlay"
       ref="overlay"
       :class="overlayClass"
       :aria-expanded="visibility.overlay.toString()"
@@ -22,14 +22,12 @@
           @after-leave="afterTransitionLeave"
         >
           <div
-            v-if="visibility.modal"
+            v-show="visibility.modal"
             ref="modal"
             :class="modalClass"
             :style="modalStyle"
           >
-            <keep-alive>
-              <slot/>
-            </keep-alive>
+            <slot/>
             <resizer
               v-if="resizable && !isAutoHeight"
               :min-width="minWidth"
