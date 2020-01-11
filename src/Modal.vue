@@ -1,45 +1,45 @@
 <template>
   <transition :name="overlayTransition">
-    <div
-      v-show="visibility.overlay"
-      ref="overlay"
-      :class="overlayClass"
-      :aria-expanded="visibility.overlay.toString()"
-      :data-modal="name"
-    >
       <div
-        class="v--modal-background-click"
-        @mousedown.self="handleBackgroundClick"
-        @touchstart.self="handleBackgroundClick"
+        v-show="visibility.overlay"
+        ref="overlay"
+        :class="overlayClass"
+        :aria-expanded="visibility.overlay.toString()"
+        :data-modal="name"
       >
-        <div class="v--modal-top-right">
-          <slot name="top-right"/>
-        </div>
-        <transition
-          :name="transition"
-          @before-enter="beforeTransitionEnter"
-          @after-enter="afterTransitionEnter"
-          @after-leave="afterTransitionLeave"
+        <div
+          class="v--modal-background-click"
+          @mousedown.self="handleBackgroundClick"
+          @touchstart.self="handleBackgroundClick"
         >
-          <div
-            v-show="visibility.modal"
-            ref="modal"
-            :class="modalClass"
-            :style="modalStyle"
-          >
-            <slot/>
-            <resizer
-              v-if="resizable && !isAutoHeight"
-              :min-width="minWidth"
-              :min-height="minHeight"
-              :max-width="maxWidth"
-              :max-height="maxHeight"
-              @resize="handleModalResize"
-            />
+          <div class="v--modal-top-right">
+            <slot name="top-right"/>
           </div>
-        </transition>
+          <transition
+            :name="transition"
+            @before-enter="beforeTransitionEnter"
+            @after-enter="afterTransitionEnter"
+            @after-leave="afterTransitionLeave"
+          >
+            <div
+              v-show="visibility.modal"
+              ref="modal"
+              :class="modalClass"
+              :style="modalStyle"
+            >
+              <slot/>
+              <resizer
+                v-if="resizable && !isAutoHeight"
+                :min-width="minWidth"
+                :min-height="minHeight"
+                :max-width="maxWidth"
+                :max-height="maxHeight"
+                @resize="handleModalResize"
+              />
+            </div>
+          </transition>
+        </div>
       </div>
-    </div>
   </transition>
 </template>
 <script>
