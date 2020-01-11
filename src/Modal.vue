@@ -27,7 +27,9 @@
             :class="modalClass"
             :style="modalStyle"
           >
-            <slot/>
+            <keep-alive>
+              <slot/>
+            </keep-alive>
             <resizer
               v-if="resizable && !isAutoHeight"
               :min-width="minWidth"
